@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import TaskBoard from './components/TaskBoard';
 import './App.css';
+import ToolBar from './components/DesignSystem/ToolBar';
+import GridItem from './components/DesignSystem/GridItem'
 
-function App() {
+const container: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: '100%',
+  gridTemplateRows: `
+    auto
+    1fr
+  `,
+  gridTemplateAreas: `
+    "toolbar"
+    "content"
+  `,
+  height: '100vh',
+}
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={container}>
+      <GridItem gridArea="toolbar">
+        <ToolBar text="Hand Written Notes"  />
+      </GridItem>
+
+      <GridItem gridArea="content" style={{overflow: 'scroll'}}>
+        <TaskBoard />
+      </GridItem>
     </div>
   );
 }
